@@ -1,12 +1,30 @@
 const express = require('express');
-const port = 8000
+const cors = require('cors');
+const app = express();
+const port = 8000;
 
-const app = express()
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
-app.use('/', (req, res) => {
-    res.send("hello world");
-});
+require('./config/mongoose.config');
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});
+require('./routes/project.route')(app);
+
+app.listen(port, () => console.log(`${port} is being listened to`));
+
+
+
+
+// const express = require('express');
+// const port = 8000
+
+// const app = express()
+
+// app.use('/', (req, res) => {
+//     res.send("hello world");
+// });
+
+// app.listen(port, () => {
+//     console.log(`Listening on port ${port}`);
+// });
