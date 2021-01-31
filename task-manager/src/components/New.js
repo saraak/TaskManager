@@ -44,7 +44,7 @@ const New = (props) => {
     return (
         <div >
             <div >
-                <h2>Project Manager</h2>
+                <h2>Project Manager 1</h2>
                 <button 
                 type="submit" 
                 onClick = {(e) => goHome(e)} 
