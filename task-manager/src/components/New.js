@@ -61,7 +61,7 @@ const New = (props) => {
                     <div className="projectCard"> 
                         <div style={{margin: "5px"}}>
                             <div>
-                                <label style= {{display: "inline-block"}, {margin: "0px 12px 5px 5px"}}>Project Name</label>
+                                <label style= {{display: "inline-block", margin: "0px 12px 5px 5px"}}>Project Name</label>
                                 <input
                                     type="text"
                                     name="name"
@@ -79,19 +79,20 @@ const New = (props) => {
                                 ) : null
                                 } 
                         </div>
-                        <label style= {{display: "inline-block"},{margin: "0px 40px 5px 5px"}}>
+                        <label style= {{display: "inline-block", margin: "0px 40px 5px 5px"}}>
                             Due Date</label>
                         <input
                                 type="date"
                                 name="dueDate"
                                 onChange={(e) => setDueDate(e.target.value)}
-                                style={{display: "inline-block"}, {margin: "0% 10%"}, {width: "200px"}}
+                                style={{display: "inline-block", margin: "0% 10%", width: "200px"}}
                         />
                         {errors.dueDate ? (
                                 <span className="errorFont" style={{display: "block"}}>{errors.dueDate.message}</span>
                             ) : null
                             }
-                        <button type="submit" onClick = {(e) => addProject(e)} className="blueButton" style={{margin:"40px 0px"}, {width: "300px"}}>
+                        <button type="submit" onClick = {(e) =>
+                            addProject(e)} className="blueButton" style={{margin:"40px 0px", width: "300px"}}>
                             Plan Project
                         </button>
                     </div>
