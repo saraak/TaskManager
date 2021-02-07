@@ -3,7 +3,7 @@ const Project = require('../models/project.model');
 
 module.exports = {
     findAll: (req, res) => {
-        Project.find().sort('dueDate')
+        Project.find({creator: req.body.id}).sort('dueDate')
         .then((allProjects) => res.json(allProjects))
         .catch((err) => res.json({message: "An error has happened.", error: err}));
     },
