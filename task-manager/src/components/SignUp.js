@@ -10,7 +10,11 @@ const SignUp = () => {
                 <label for="lname">Last name:</label><br/>
                     <input type='text' /><br/>
                 <label for="email">Email:</label><br />
-                    <input type='email' /><br/>           
+                    <input type='email' /><br/>
+                <label for="password">Password:</label><br/>
+                    <input type='password'/><br/>
+                <label for="confirmpassword">Password:</label><br/>
+                    <input type='confirmpassword'/><br/>
             </form><br/>
             <footer>THE TASK MANAGER</footer>
         </div>

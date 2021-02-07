@@ -70,9 +70,9 @@ const ShowAll = (props) => {
     return (
       <div >
         <div>         
-          <h2>Project Manager</h2>        
+          <h2>Welcome back, (Name)</h2>
         </div>
-        <div style={{width: "span"},{margin:"0px"}}>
+        <div style={{width: "span", margin:"0px"}}>
           <h3 className="colTitle" id="bckLog">Backlog</h3>
           <h3 className="colTitle" id="inProgress">In Process</h3>
           <h3 className="colTitle" id="completedTitle">Complete</h3>
