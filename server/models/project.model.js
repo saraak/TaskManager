@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const ProjectSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "This Project needs a Name"],
-        minLength: [3, "Name must be at least 3 letters."]
+        required: [true, "This project needs a name."],
+        minLength: [3, "Name must be at least 3 characters."]
     },     
     
     dueDate: {
         type: Date,
-        required: [true, "Each Project needs a due date"],
+        required: [true, "Each Project needs a due date."],
     },   
     backlog:{
         type: Boolean,
@@ -24,9 +24,7 @@ const ProjectSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    
-
-
 }, {timestamps: true});
+
 
 module.exports = mongoose.model('Project', ProjectSchema);
