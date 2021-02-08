@@ -1,27 +1,28 @@
 // console.log("controller.js");
 const User = require('../models/user.model')
 const bcrypt = require("bcrypt");
+function generateHash (password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
 
 module.exports = {
-    generateHash: (password) => {
-        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    },
 
     create: (req, res) => {
         let newUser = req.body;
-        newUser.password = this.generateHash(req.body.password)
+        newUser.password = generateHash(req.body.password)
         User.create(newUser)
             .then((newUser) => res.json(newUser))
-            .catch((err) => res.json({message: "Unable to create new user", error: err}));
+            .catch((err) => {console.log(err); res.json(err)});
     },
 
     find: (req, res) => {
         User.findOne({email: req.body.email})
             .then((user) => {
+                if(!user) throw new Error("Invalid")
                 if(user.validPassword(req.body.password)) return user;
                 else throw new Error("Invalid");
             })
             .then((findUser) => res.json(findUser))
-            .catch((err) => res.json({message: "Account does not exist", error: err}));
+            .catch((err) => res.status(404).json(err));
     }
 }

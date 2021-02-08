@@ -10,17 +10,20 @@ const ShowAll = (props) => {
     const [completed, setCompleted] = useState();
     const [name, setName] = useState("");
     const [dueDate, setDueDate] = useState("");
+    const [tickle, setTickle] = useState(false);
 
     useEffect(() => {
         axios
-            .get("http://localhost:8000/api/Projects")
+            .post("http://localhost:8000/api/Projects", {
+                id: props.getUser._id
+            })
             .then((res) => {
                 console.log(res.data);
                 setAllProjects(res.data);
               })
             .catch(err => console.log(err));
         
-    }, [])
+    }, [tickle])
     const backlogToInProgress = (e, id, nm, dd) => {
       e.preventDefault();
       console.log(`${id} ${nm} ${dd}`);
@@ -35,10 +38,9 @@ const ShowAll = (props) => {
         })
         .then((res) => {
             console.log(res);
-            navigate('/');
+            setTickle(!tickle);
         })
         .catch((err) => console.log(err));
-        window.location.reload();
     }
     const inProgressToComplete = (e, id, nm, dd) => { 
       e.preventDefault();
@@ -54,10 +56,9 @@ const ShowAll = (props) => {
         })
         .then((res) => {
             console.log(res);
-            navigate('/');
+            setTickle(!tickle);
         })
         .catch((err) => console.log(err));     
-        window.location.reload();
     }
 
     const deleteProject = (e, id) => {
@@ -65,12 +66,11 @@ const ShowAll = (props) => {
       axios
           .delete(`http://localhost:8000/api/Projects/${id}`)
           .catch((err) => console.log(err));
-          window.location.reload();
   }
     return (
       <div >
         <div>         
-          <h2>Welcome back, (Name)</h2>
+          <h2>Welcome back, {props.getUser.firstName} </h2>
         </div>
         <div style={{width: "span", margin:"0px"}}>
           <h3 className="colTitle" id="bckLog">Backlog</h3>
@@ -83,10 +83,10 @@ const ShowAll = (props) => {
               <div>  
                 {Project.backlog ? 
                   <p key={ i } className="projectThumb">
-                    <div style={{display: "inline-block"}}>
+                    <div style={{display: "inline-block", color: "black"}}>
                         <h4>{ Project.name }</h4>
                         <p>Due Date: {(new Date(Project.dueDate)).toLocaleDateString("en-us")}</p>
-                        {/* <p>{Project._id}</p> */}
+                         <p>{Project._id}</p>
                       <button 
                         className="redButton" 
                         id="mvProg"
@@ -106,7 +106,7 @@ const ShowAll = (props) => {
               <div>  
                 {Project.inProgress ? 
                   <p key={ i } className="projectThumb">
-                    <div style={{display: "inline-block"}}>
+                    <div style={{display: "inline-block", color: "black"}}>
                       <h4>{ Project.name }</h4>
                       <p>Due Date: {(new Date(Project.dueDate)).toLocaleDateString("en-us")}</p>                        
                       <button 
@@ -128,7 +128,7 @@ const ShowAll = (props) => {
               <div>  
                 {Project.completed ? 
                   <p key={ i } className="projectThumb">
-                    <div style={{display: "inline-block"}}>
+                    <div style={{display: "inline-block", color: "black"}}>
                       <h4>{ Project.name }</h4>
                       <p>Due Date: {(new Date(Project.dueDate)).toLocaleDateString("en-us")}</p>
                       <button 
