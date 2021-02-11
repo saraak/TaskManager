@@ -102,7 +102,7 @@ const SignUp = (props) => {
 
                 <label className="m-3">Password</label>
                 <input className="form-control w-50 col-lg-4 offset-lg-4"
-                       type="text"
+                       type="password"
                        name="password"
                        value={ password }
                        onChange={ (e) => setPassword(e.target.value)}/>
